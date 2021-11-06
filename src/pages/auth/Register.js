@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { actionPostItems } from '../../redux/action/auth';
+import { useNavigation } from '@react-navigation/core';
 
 const SignupSchema = Yup.object().shape({
   full_name : Yup.string()
@@ -23,6 +24,7 @@ const SignupSchema = Yup.object().shape({
 const Register = () => {
   
   const dispatch = useDispatch()
+  const navigation = useNavigation()
 
   return (
     <Layout title='Register'>
@@ -44,7 +46,7 @@ const Register = () => {
           return error;
         }}
         
-        onSubmit={values => dispatch(actionPostItems(values))}
+        onSubmit={values => dispatch(actionPostItems(values,navigation))}
 
       >
         {({ handleChange, handleBlur, handleSubmit, values,errors }) => (

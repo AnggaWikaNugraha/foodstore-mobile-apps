@@ -1,12 +1,11 @@
 import {showMessage as toastMessage} from 'react-native-flash-message';
 import {colors} from './colors';
 
-export const showMessage = (message, type, backgroundColor, color, onPress) => {
+export const showMessage = (message, type) => {
   toastMessage({
     message,
-    type,
-    backgroundColor,
-    color,
-    onPress : onPress ? onPress: () => { console.log('tes') }
+    type: type === 'success' ? 'success' : 'danger',
+    backgroundColor:
+      type === 'success' ? colors.message.success : colors.message.error,
   });
 };
