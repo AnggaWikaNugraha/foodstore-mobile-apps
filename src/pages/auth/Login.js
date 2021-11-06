@@ -6,7 +6,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { actionPostItems } from '../../redux/action/auth';
-import { useNavigation } from '@react-navigation/core';
 
 const SignupSchema = Yup.object().shape({
   full_name : Yup.string()
@@ -17,36 +16,24 @@ const SignupSchema = Yup.object().shape({
   password : Yup.string()
     .min(9, 'Password must be length 9')
     .required('Required'),
-  K_password : Yup.string()
-    .required('Required')
 });
 
-const Register = () => {
+const Login = () => {
   
   const dispatch = useDispatch()
-  const navigation = useNavigation()
 
   return (
-    <Layout title='Register'>
+    <Layout title='Login'>
       <View style={styles.wrapper}>
       <Formik
         initialValues={{ 
           full_name : '',
           email: '',
-          password : '',
-          K_password : ''
+          password : ''
         }}
 
         validationSchema={SignupSchema}
-        validate={(values) => {
-          const error = {}
-            if (values.password !== values.K_password){
-              error.K_password = 'Password not matching'
-            }
-          return error;
-        }}
-        
-        onSubmit={values => dispatch(actionPostItems(values,navigation))}
+        onSubmit={values => dispatch(actionPostItems(values))}
 
       >
         {({ handleChange, handleBlur, handleSubmit, values,errors }) => (
@@ -95,21 +82,6 @@ const Register = () => {
                       )}
             </View>
 
-            <View style={styles.formGrup(10)}>
-              <Text style={styles.versionText(13)}>Konfirmasi Password</Text>
-              <TextInput
-                style={styles.TextInput()}
-                onChangeText={handleChange('K_password')}
-                onBlur={handleBlur('K_password')}
-                value={values.K_password}
-              />
-              {errors.K_password && (
-                        <Text style={{fontSize: 10, color: 'red'}}>
-                          {errors.K_password}
-                        </Text>
-                      )}
-            </View>
-
             <Button onPress={handleSubmit} title="Submit" />
           </>
         )}
@@ -120,7 +92,7 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
 
 const styles = StyleSheet.create({
   wrapper : {

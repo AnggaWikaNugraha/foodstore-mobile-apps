@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../pages/auth/SplashScreen';
 import OnBoarding from '../pages/auth/onBoarding';
 import Register from '../pages/auth/Register';
+import Login from '../pages/auth/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,11 @@ const Router = () => {
       <Stack.Screen 
         name='Register'
         component={Register}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen 
+        name='Login'
+        component={Login}
         options={{headerShown: false}}
       />
     {/* auth */}
