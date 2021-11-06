@@ -4,6 +4,8 @@ import { colors } from '../../utils/colors';
 import Layout from '../layout';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { actionPostItems } from '../../redux/action/auth';
 
 const SignupSchema = Yup.object().shape({
   full_name : Yup.string()
@@ -20,6 +22,8 @@ const SignupSchema = Yup.object().shape({
 
 const Register = () => {
   
+  const dispatch = useDispatch()
+
   return (
     <Layout title='Register'>
       <View style={styles.wrapper}>
@@ -40,7 +44,7 @@ const Register = () => {
           return error;
         }}
         
-        onSubmit={values => console.log(values)}
+        onSubmit={values => dispatch(actionPostItems(values))}
 
       >
         {({ handleChange, handleBlur, handleSubmit, values,errors }) => (
