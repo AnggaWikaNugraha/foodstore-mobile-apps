@@ -12,6 +12,7 @@ const SignupSchema = Yup.object().shape({
     .email('Invalid email')
     .required('Required'),
   password : Yup.string()
+    .min(9, 'Password must be length 9')
     .required('Required'),
   K_password : Yup.string()
     .required('Required')
@@ -26,7 +27,6 @@ const Register = () => {
         initialValues={{ 
           full_name : '',
           email: '',
-          role : '',
           password : '',
           K_password : ''
         }}
