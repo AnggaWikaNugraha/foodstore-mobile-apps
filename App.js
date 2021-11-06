@@ -1,13 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import SplashScreen from './src/pages/auth/SplashScreen';
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Router from './src/router';
 
-export default function App() {
+function App() {
   return (
-    <>
-     <SplashScreen/>
-    </>
+    <NavigationContainer>
+     <Router/>
+    </NavigationContainer>
   );
 }
 
+export default App;
