@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import store from './src/redux';
+import {Provider} from 'react-redux';
+
 import { NavigationContainer } from '@react-navigation/native';
 import Router from './src/router';
 
 function App() {
   return (
-    <NavigationContainer>
-     <Router/>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+      <Router/>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
