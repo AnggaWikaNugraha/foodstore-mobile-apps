@@ -3,7 +3,19 @@ import { StyleSheet,  Text,  Button, TextInput,  View} from 'react-native';
 import { colors } from '../../utils/colors';
 import Layout from '../layout';
 import { Formik } from 'formik';
-import Gap from '../../utils/Gap';
+import * as Yup from 'yup';
+
+const SignupSchema = Yup.object().shape({
+  full_name : Yup.string()
+    .required('Required'),
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password : Yup.string()
+    .required('Required'),
+  K_password : Yup.string()
+    .required('Required')
+});
 
 const Register = () => {
   
@@ -15,13 +27,23 @@ const Register = () => {
           full_name : '',
           email: '',
           role : '',
-          password : ''
-          }}
+          password : '',
+          K_password : ''
+        }}
 
+        validationSchema={SignupSchema}
+        validate={(values) => {
+          const error = {}
+            if (values.password !== values.K_password){
+              error.K_password = 'Password not matching'
+            }
+          return error;
+        }}
+        
         onSubmit={values => console.log(values)}
 
       >
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
+        {({ handleChange, handleBlur, handleSubmit, values,errors }) => (
           <>
             <View style={styles.formGrup(10)}>
               <Text style={styles.versionText(13)}>Full name</Text>
@@ -31,6 +53,11 @@ const Register = () => {
                 onBlur={handleBlur('full_name')}
                 value={values.full_name}
               />
+              {errors.full_name && (
+                        <Text style={{fontSize: 10, color: 'red'}}>
+                          {errors.full_name}
+                        </Text>
+                      )}
             </View>
             <View style={styles.formGrup(10)}>
               <Text style={styles.versionText(13)}>Email</Text>
@@ -40,16 +67,11 @@ const Register = () => {
                 onBlur={handleBlur('email')}
                 value={values.email}
               />
-            </View>
-
-            <View style={styles.formGrup(10)}>
-              <Text style={styles.versionText(13)}>Role</Text>
-              <TextInput
-                style={styles.TextInput()}
-                onChangeText={handleChange('role')}
-                onBlur={handleBlur('role')}
-                value={values.role}
-              />
+              {errors.email && (
+                        <Text style={{fontSize: 10, color: 'red'}}>
+                          {errors.email}
+                        </Text>
+                      )}
             </View>
 
             <View style={styles.formGrup(10)}>
@@ -60,6 +82,26 @@ const Register = () => {
                 onBlur={handleBlur('password')}
                 value={values.password}
               />
+               {errors.password && (
+                        <Text style={{fontSize: 10, color: 'red'}}>
+                          {errors.password}
+                        </Text>
+                      )}
+            </View>
+
+            <View style={styles.formGrup(10)}>
+              <Text style={styles.versionText(13)}>Konfirmasi Password</Text>
+              <TextInput
+                style={styles.TextInput()}
+                onChangeText={handleChange('K_password')}
+                onBlur={handleBlur('K_password')}
+                value={values.K_password}
+              />
+              {errors.K_password && (
+                        <Text style={{fontSize: 10, color: 'red'}}>
+                          {errors.K_password}
+                        </Text>
+                      )}
             </View>
 
             <Button onPress={handleSubmit} title="Submit" />
@@ -78,7 +120,7 @@ const styles = StyleSheet.create({
   wrapper : {
     flex : 1,
     width : '100%',
-    paddingTop : 30,
+    paddingTop : 10,
     paddingHorizontal : 30,
   },
   formGrup : (marginVertical) => ({
