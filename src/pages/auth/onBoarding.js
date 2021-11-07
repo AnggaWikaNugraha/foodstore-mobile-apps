@@ -14,14 +14,25 @@ const OnBoarding = () => {
       <View style={styles.version}>
           <Text style={styles.versionText(16)}>Hallo Selamat Datang</Text>
           <Gap height={10}/>
-          <Button
-            onPress={()=> navigation.navigate('Register')}
-            borderRadius={3}
-            paddingHorizontal={20}
-            paddingVertical={5}
-            backgroundColor={colors.button.blue}
-            title='Selanjutnya'/>
+          <View style={{flexDirection : 'row'}}>
+            <Button
+              onPress={()=> navigation.navigate('Register')}
+              borderRadius={3}
+              paddingHorizontal={20}
+              paddingVertical={5}
+              backgroundColor={colors.button.blue}
+              title='Register'/>
+              <Gap width={10}/>
+              <Button
+              onPress={()=> navigation.navigate('Login')}
+              borderRadius={3}
+              paddingHorizontal={20}
+              paddingVertical={5}
+              backgroundColor={colors.button.blue}
+              title='Login'/>
+          </View>
         </View>
+        
     </View>
   );
 };

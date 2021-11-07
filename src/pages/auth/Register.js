@@ -5,7 +5,7 @@ import Layout from '../layout';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { actionPostItems } from '../../redux/action/auth';
+import { actionPostItems } from '../../redux/action/auth/register';
 import { useNavigation } from '@react-navigation/core';
 
 const SignupSchema = Yup.object().shape({
