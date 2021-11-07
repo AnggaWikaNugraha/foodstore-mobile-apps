@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import Layout from "../layout";
 import { colors } from "../../utils/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { getData } from "../../utils/storage";
+import { actionGetItems } from "../../redux/action/user/products";
 
 const Beranda = () => {
+
+  const dispatch = useDispatch()
+  const StateProducts = useSelector(state => state.StateProducts)
+  console.log(StateProducts.response.products)
+
+  useEffect(() => {
+   getData('stateLogin').then(res => {
+     dispatch(actionGetItems(res.token))
+   })
+  }, [])
+
   return (
     <Layout title="Beranda">
       <View style={styles.wrapper}>
@@ -14,13 +28,16 @@ const Beranda = () => {
             justifyContent: "flex-start",
           }}
         >
-         
-          <View style={styles.card}>
-            <Text style={styles.versionText(13, colors.text.black)}>Name : Semangka</Text>
-            <Text style={styles.versionText(11, colors.text.black)}>Price Rp 20.000</Text>
-            <Text style={styles.versionText(11, colors.text.black)}>Tags: sayuran,segar</Text>
-            <Text style={styles.versionText(11, colors.text.black)}>Desciption : Good</Text>
+         {
+          StateProducts.response.products && StateProducts.response.products.map((res,key) => {return(
+          <View key={key} style={styles.card}>
+            <Text style={styles.versionText(13, colors.text.black)}>Name : {res?.name}</Text>
+            <Text style={styles.versionText(11, colors.text.black)}>Price Rp {res?.price}</Text>
+            <Text style={styles.versionText(11, colors.text.black)}>Tags: {res?.tags.map((res) => console.log('tags' + res))}</Text>
+            <Text style={styles.versionText(11, colors.text.black)}>Desciption : {res?.description}</Text>
           </View>
+          )})
+         }
           
         </View>
       </View>
