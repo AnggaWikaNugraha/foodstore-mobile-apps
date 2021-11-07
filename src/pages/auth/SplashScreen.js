@@ -18,7 +18,7 @@ const SplashScreen = () => {
         if (res.roles === 'admin') {
           console.log('admin')
         } else {
-          navigation.reset({index: 0, routes: [{name: 'Beranda'}]});
+          navigation.reset({index: 0, routes: [{name: 'User'}]});
         }
       }).catch(e => navigation.navigate('OnBoarding'))
       
