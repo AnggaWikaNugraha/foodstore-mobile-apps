@@ -14,11 +14,10 @@ const Beranda = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      const unsubscribe = getData('stateLogin').then(res => {
+      getData('stateLogin').then(res => {
         dispatch(actionGetItems(res.token))
       })
 
-      return () => unsubscribe();
     }, [dispatch])
   );
 
