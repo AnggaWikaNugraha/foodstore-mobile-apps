@@ -7,6 +7,7 @@ import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
 import Beranda from "../pages/user/beranda";
 import { colors } from "../utils/colors";
+import Profile from "../pages/user/Profile";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -90,7 +91,7 @@ const TabUser = () => {
 
       <Stack.Screen
         name="Akun"
-        component={Beranda}
+        component={Profile}
         options={{
           headerShown: false,
         }}
