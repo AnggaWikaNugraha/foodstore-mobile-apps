@@ -4,6 +4,7 @@ import SplashScreen from '../pages/auth/SplashScreen';
 import OnBoarding from '../pages/auth/onBoarding';
 import Register from '../pages/auth/Register';
 import Login from '../pages/auth/Login';
+import Beranda from '../pages/user/beranda';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +32,15 @@ const Router = () => {
         component={Login}
         options={{headerShown: false}}
       />
-    {/* auth */}
+    {/* akhir auth */}
+
+    {/* user */}
+    <Stack.Screen 
+        name='Beranda'
+        component={Beranda}
+        options={{headerShown: false}}
+      />
+    {/* akhir user */}
     
     </Stack.Navigator>
   )

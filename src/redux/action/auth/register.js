@@ -1,11 +1,11 @@
-import {setLoading} from '../../utils/loading';
+import {setLoading} from '../../../utils/loading';
 import {
   REGISTER,
   REGISTER_ERROR
-} from '../type/auth/TypeAuth';
-import {showMessage} from '../../utils/flashMessage';
-import { postItem } from '../../api/auth/register';
-import { colors } from '../../utils/colors';
+} from '../../type/auth/TypeAuth';
+import {showMessage} from '../../../utils/flashMessage';
+import { postItem } from '../../../api/auth/register';
+import { colors } from '../../../utils/colors';
 
 const succesPostItem = payload => {
   return {
@@ -14,7 +14,7 @@ const succesPostItem = payload => {
   };
 };
 
-const errorPostItem = payload => {
+const errorPostItem = () => {
   return {
     type: REGISTER_ERROR,
   };
