@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/core';
 import React, {useEffect} from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import { colors } from '../../utils/colors';
+import { getData } from '../../utils/storage';
 
 const {height} = Dimensions.get('window');
 
@@ -11,7 +12,16 @@ const SplashScreen = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('OnBoarding');
+      
+      getData('stateLogin')
+      .then(res => {
+        if (res.roles === 'admin') {
+          console.log('admin')
+        } else {
+          navigation.reset({index: 0, routes: [{name: 'User'}]});
+        }
+      }).catch(e => navigation.navigate('OnBoarding'))
+      
     }, 3000);
   }, []);
 
