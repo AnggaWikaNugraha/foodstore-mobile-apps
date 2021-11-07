@@ -5,18 +5,22 @@ import { colors } from "../../utils/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../utils/storage";
 import { actionGetItems } from "../../redux/action/user/products";
+import { useFocusEffect } from "@react-navigation/core";
 
 const Beranda = () => {
 
   const dispatch = useDispatch()
   const StateProducts = useSelector(state => state.StateProducts)
-  console.log(StateProducts.response.products)
 
-  useEffect(() => {
-   getData('stateLogin').then(res => {
-     dispatch(actionGetItems(res.token))
-   })
-  }, [])
+  useFocusEffect(
+    React.useCallback(() => {
+      const unsubscribe = getData('stateLogin').then(res => {
+        dispatch(actionGetItems(res.token))
+      })
+
+      return () => unsubscribe();
+    }, [dispatch])
+  );
 
   return (
     <Layout title="Beranda">
